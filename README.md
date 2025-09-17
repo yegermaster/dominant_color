@@ -17,10 +17,10 @@ It provides both a **palette visualization** and a **color table** (HEX, RGB, an
 
 ## 📸 Screenshots
 
-![alt text](pr/barney_img.png)
+![alt text](barney_img.png)
 
 
-![alt text](pr/matrix_img.png)
+![alt text]matrix_img.png)
 ---
 
 ## 🚀 Getting Started
