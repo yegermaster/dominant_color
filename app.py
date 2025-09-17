@@ -1,4 +1,7 @@
 # app.py
+# This is a Gradio web app for extracting dominant colors from images and videos.
+# It uses the dominant_colors package for analysis.
+
 import os
 import tempfile
 from pathlib import Path
@@ -7,12 +10,13 @@ import gradio as gr
 import pandas as pd
 
 # Local imports: functions for image and video dominant color extraction
-from dominant_colors_simple import dominant_colors as img_dominant_colors, render_palette as render_palette_img
-from dominant_colors_video import (
+from dominant_colors.simple import dominant_colors as img_dominant_colors, render_palette as render_palette_img
+from dominant_colors.video import (
     sample_video_pixels,
     dominant_colors_from_pixels,
     render_palette as render_palette_vid,
 )
+
 
 # Global constants for palette rendering dimensions
 PALETTE_WIDTH = 900
