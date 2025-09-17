@@ -10,6 +10,7 @@ import gradio as gr
 import pandas as pd
 
 # Local imports: functions for image and video dominant color extraction
+from ui import build_demo
 from dominant_colors.simple import dominant_colors as img_dominant_colors, render_palette as render_palette_img
 from dominant_colors.video import (
     sample_video_pixels,
@@ -123,6 +124,7 @@ def process_video(video_path, k, frame_step, resize, limit_frames, exclude_extre
 
 
 # Build Gradio interface
+
 demo_title = "Dominant Colors – Image & Video"
 demo_description = (
     "# Dominant Colors – Image & Video\n"
@@ -185,7 +187,6 @@ with gr.Blocks(title=demo_title, theme=gr.themes.Soft()) as demo:
 """
     )
 
-
 if __name__ == "__main__":
-    # For local testing run: `python app.py`
-    demo.queue(concurrency_count=2).launch(server_name="0.0.0.0", server_port=int(os.getenv("PORT", 7860)))
+    demo = build_demo(process_image, process_video)
+    demo.queue().launch(server_name="0.0.0.0", server_port=int(os.getenv("PORT", 7860)))
