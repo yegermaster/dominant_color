@@ -1,138 +1,70 @@
-Here’s a clean, ready-to-paste README for your Gradio app.
+# Dominant Colors – Image & Video
 
-# Dominant Colors – Image & Video (Gradio)
-
-Extract the top dominant colors from images **or** videos, with a palette preview and a table of HEX/RGB percentages. Built for local use and easy deployment to **Hugging Face Spaces**.
-
----
-
-## Features
-
-* Image tab: upload an image, get a palette + table.
-* Video tab: sample frames to compute a **global** palette (not per-frame).
-* Tunable parameters: `K` clusters, downsampling, frame step, limit frames, exclude near-black/near-white, show labels.
-* CPU-friendly; suitable for free tiers.
+A **Gradio web app** that extracts the **top dominant colors** from images and videos.
+It provides both a **palette visualization** and a **color table** (HEX, RGB, and percentage).
 
 ---
 
-## Quickstart (Local)
+## 🌟 Features
 
-Requirements: Python 3.9–3.11
-
-```bash
-# 1) Clone your repo (or copy files into a folder)
-# app.py
-# dominant_colors_simple.py
-# dominant_colors_video.py
-# requirements.txt
-
-# 2) Create & activate a virtualenv (Windows PowerShell shown)
-python -m venv .venv
-.venv\Scripts\activate
-
-# 3) Install dependencies
-pip install -r requirements.txt
-
-# 4) Run the app
-python app.py
-```
-
-Open [http://localhost:7860](http://localhost:7860)
-
-> The app sets `server_name="0.0.0.0"` and respects `PORT` if provided (useful for cloud hosts).
-
-**Example `requirements.txt`**
-
-```
-gradio>=4.0
-pandas
-numpy
-pillow
-scikit-learn
-opencv-python
-```
+* **Image analysis** – upload any picture and get its dominant colors.
+* **Video analysis** – sample frames from a video to compute global color palettes.
+* **Customizable parameters** – adjust K (number of colors), downsampling, frame step, and whether to exclude near-white/near-black.
+* **Palette visualization** – clean horizontal color bar with optional HEX/percentage labels.
+* **Color table** – full breakdown of HEX codes, RGB values, and proportions.
 
 ---
 
-## Interface Overview
+## 📸 Screenshots
 
-### Image tab
+![alt text](pr/barney_img.png)
 
-* **Inputs**
 
-  * Image file
-  * **Top K colors** (1–12)
-  * **Downsample max side (px)**: resize longest side for speed
-  * **Exclude near-black/near-white**: filter out extremes
-  * **Show labels**: annotate palette with HEX and %
-* **Outputs**
+![alt text](pr/matrix_img.png)
+---
 
-  * Palette PNG
-  * Table: `hex`, `rgb`, `percent`
+## 🚀 Getting Started
 
-### Video tab
+### Local Setup
 
-* **Inputs**
+1. Clone the repository:
 
-  * Video file
-  * **Top K colors** (1–12)
-  * **Frame step**: sample every Nth frame
-  * **Downsample max side (px)**: resize frames for speed
-  * **Max sampled frames**: safety cap
-  * **Exclude near-black/near-white**, **Show labels**
-* **Outputs**
+   ```bash
+   git clone https://github.com/yegermaster/dominant-colors.git
+   cd dominant-colors
+   ```
 
-  * Palette PNG
-  * Table: `hex`, `rgb`, `percent`
+2. Create and activate a virtual environment:
 
-> Video analysis computes a **global** palette across sampled frames (no timeline breakdown).
+   ```bash
+   python -m venv venv
+   # Windows PowerShell
+   .\venv\Scripts\Activate.ps1
+   # macOS/Linux
+   source venv/bin/activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the app:
+
+   ```bash
+   python app.py
+   ```
+
+5. Open [http://127.0.0.1:7860](http://127.0.0.1:7860) in your browser.
 
 ---
 
-## How It Works (High Level)
+## ⚙️ Tech Stack
 
-* **Images**: downsample → flatten pixels → K-Means → sort by frequency → render palette + table.
-* **Videos**: sample frames (`frame_step`, `limit_frames`) → optional downsample → collect pixels → K-Means on all sampled pixels → render palette + table.
-* Palette images are written to a temp directory; Gradio displays the generated file.
-
----
-
-## Project Structure
-
-```
-.
-├─ app.py                      # Gradio Blocks UI
-├─ dominant_colors_simple.py   # Image pipeline + palette render
-├─ dominant_colors_video.py    # Video sampling + K-Means + palette render
-└─ requirements.txt
-```
-
----
-
-## Deploy to Hugging Face Spaces
-
-1. Create a new Space → **Gradio** template.
-2. Upload `app.py`, `dominant_colors_simple.py`, `dominant_colors_video.py`, `requirements.txt`.
-3. Hardware: CPU Basic is fine.
-4. Space will install deps and run `python app.py` (uses `PORT` env var automatically).
-
----
-
-## Troubleshooting
-
-* **OpenCV import errors** → reinstall `opencv-python` in your venv.
-* **NumPy/SciPy ABI mismatch** → upgrade/downgrade to compatible versions (`pip install --upgrade numpy scikit-learn`).
-* **No palette shown** → check parameter ranges and file type; verify logs in terminal.
-* **Large videos slow** → increase `Frame step`, decrease `Downsample max side`, or lower `Max sampled frames`.
-
----
-
-## License
-
-Choose a license for your repo (e.g., MIT). Add a `LICENSE` file if needed.
-
----
-
-## Acknowledgements
-
-Built with **Gradio**, **NumPy**, **scikit-learn**, **OpenCV**, and **Pillow**.
+* [Python](https://www.python.org/)
+* [Gradio](https://gradio.app/) – Web UI
+* [OpenCV](https://opencv.org/) – Video frame sampling
+* [scikit-learn](https://scikit-learn.org/) – KMeans clustering
+* [Pandas](https://pandas.pydata.org/) – Data display
+* [Pillow](https://python-pillow.org/) – Image handling
