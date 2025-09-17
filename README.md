@@ -20,7 +20,7 @@ It provides both a **palette visualization** and a **color table** (HEX, RGB, an
 ![alt text](barney_img.png)
 
 
-![alt text]matrix_img.png.png)
+![alt text]matrix_img.png)
 ---
 
 ## 🚀 Getting Started
